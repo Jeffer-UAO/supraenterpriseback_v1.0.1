@@ -1,0 +1,66 @@
+from django.contrib import admin
+from .models import Product, Category, CategoryProduct, Attribut, Gallery
+
+
+# ------------------------------------------
+
+#admin.site.index_title = 'Panel Administrativo'
+#admin.site.site_header = 'Tienda Virtual NACIOTEX'
+#admin.site.site_title = 'Dashboard'
+# ------------------------------------------
+
+class GalleryInline(admin.TabularInline):
+    model = Gallery
+
+
+class CategoryProductInline(admin.TabularInline):
+    model = CategoryProduct
+
+
+# class AttributProductInline(admin.TabularInline):
+#     model = AttributProduct
+
+# ---------------------------------------------
+
+
+class AttributAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    #inlines = [AttributProductInline]
+
+
+# class AttributProductAdmin(admin.ModelAdmin):
+#     list_display = ('product', 'Attribut',  'detail')
+
+
+# class ProductEntryDetailAdmin(admin.ModelAdmin):
+#    list_display = ('product', 'qty', 'costo', 'iva', 'ProductEntry')
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('codigo', 'name', 'name_extend','modified_date', 'active')
+    prepopulated_fields = {'slug': ('name','name_extend')}
+    list_display_links = ('codigo', 'name','name_extend')
+    search_fields = ('codigo', 'name')
+    ordering = ('name',)
+    inlines = [GalleryInline, CategoryProductInline]
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'slug', 'modified_date', 'created_date')
+    readonly_fields = ('created_date',)
+    search_fields = ('name',)
+
+
+class CategoryProductAdmin(admin.ModelAdmin):
+    list_display = ('category', 'product', 'active', 'created_date')
+    readonly_fields = ('created_date',)
+    list_display_links = ('category', 'product')
+
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Attribut, AttributAdmin)
+admin.site.register(CategoryProduct, CategoryProductAdmin)
+#admin.site.register(AttributProduct, AttributProductAdmin)
+#admin.site.register(ProductEntryDetail, ProductEntryDetailAdmin)
