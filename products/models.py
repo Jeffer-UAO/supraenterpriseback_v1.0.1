@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from simple_history.models import HistoricalRecords
+from cloudinary.models import CloudinaryField
 
 
 class Product(models.Model):
@@ -52,8 +53,7 @@ class Category(models.Model):
                             verbose_name=(u'Nombre'))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=(u'Url'))
 
-    image = models.ImageField(
-        upload_to='photos/categories', blank=True, verbose_name=(u'Imagen'))
+    image = CloudinaryField('categories', blank=True)
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
     modified_date = models.DateTimeField(

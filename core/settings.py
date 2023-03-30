@@ -2,9 +2,14 @@ from pathlib import Path
 import datetime
 import os
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'customers.apps.CustomersConfig',
     'carts.apps.CartConfig',
     'stores',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +140,15 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+cloudinary.config(
+  cloud_name = "dnio5vufj",
+  api_key = "539833493919715",
+  api_secret = "huxBbY9u3457XMDHBUqihOntga8",
+#   secure = true
+)
+
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.Account'
@@ -161,3 +176,8 @@ os.makedirs(STATIC_ROOT, exist_ok=True)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+
