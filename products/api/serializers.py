@@ -20,8 +20,8 @@ class ProductSerializer(ModelSerializer):
    # data = CategoryProductSerializer(source='product_id', read_only=True, many=True)
     class Meta:
         model = Product
-        fields = ['codigo', 'barra', 'name', 'name_extend', 'slug', 'description', 'images',
-                  'price_old',  'price1', 'price2', 'price3', 'price4', 'price5', 'active', 'offer']
+        fields = ['codigo', 'ref', 'flag', 'name_extend', 'slug', 'description', 'images',
+                  'price_old',  'price1', 'active', 'offer', 'home']
 
 
 class GallerySerializer(ModelSerializer):

@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Q
 from rest_framework import filters
 
 
@@ -19,10 +20,19 @@ class CategoryApiViewSet(ModelViewSet):
 class ProductApiViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
-    queryset = Product.objects.all().order_by('name')
+    queryset = Product.objects.all().order_by('name_extend')
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
-    search_fields = ['name', 'description']
-    filterset_fields = ['slug', 'name']
+    search_fields = ['flag', 'name_extend', 'description', 'ref']
+    filterset_fields = ['slug', 'flag']
+
+
+class ProductOEApiViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        queryset = Product.objects.filter(Q(offer=True) | Q(home=True)).order_by('name_extend')
+        return queryset
 
 
 class CategoryProductApiViewSet(ModelViewSet):

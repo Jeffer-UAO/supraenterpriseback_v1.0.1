@@ -37,11 +37,11 @@ class AttributAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'name', 'name_extend','modified_date', 'active')
-    prepopulated_fields = {'slug': ('name','name_extend')}
-    list_display_links = ('codigo', 'name','name_extend')
-    search_fields = ('codigo', 'name')
-    ordering = ('name',)
+    list_display = ('codigo', 'ref', 'price1', 'flag', 'name_extend','modified_date', 'active')
+    prepopulated_fields = {'slug': ('flag','name_extend')}
+    list_display_links = ('codigo', 'flag','name_extend')
+    search_fields = ('codigo', 'flag', 'ref', 'name_extend')
+    ordering = ('name_extend',)
     inlines = [GalleryInline, CategoryProductInline]
 
 

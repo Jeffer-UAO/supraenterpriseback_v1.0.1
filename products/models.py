@@ -6,32 +6,25 @@ from cloudinary.models import CloudinaryField
 
 
 class Product(models.Model):
-    codigo = models.CharField(
-        primary_key=True, editable=True, max_length=40, verbose_name=(u'Código'))
-    barra = models.CharField(
-        max_length=200, unique=True, verbose_name=(u'Barra'))
-    name = models.CharField(max_length=200,
-                            verbose_name=(u'Nombre'))
+    codigo = models.BigAutoField(
+        primary_key=True, auto_created=True, verbose_name=(u'Código'))
+    flag = models.CharField(max_length=200, blank=True, null=True,
+                            verbose_name=(u'Bandera'))
     name_extend = models.CharField(max_length=200, unique=True,
-                                   verbose_name=(u'Nombre Extendido'))
+                                   verbose_name=(u'Nombre Producto'))
+    ref = models.CharField(max_length=200, blank=True, null=True,
+                            verbose_name=(u'Referencia'))
     images = CloudinaryField('products', blank=True)
     slug = models.SlugField(max_length=200, unique=True, verbose_name=(u'Url'))
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=(u'Detalle'))
     price1 = models.PositiveSmallIntegerField(
-        verbose_name=(u'Precio1'))
-    price2 = models.PositiveSmallIntegerField(blank=True, null=True,
-                                              verbose_name=(u'Precio2'))
-    price3 = models.PositiveSmallIntegerField(blank=True, null=True,
-                                              verbose_name=(u'Precio3'))
-    price4 = models.PositiveSmallIntegerField(blank=True, null=True,
-                                              verbose_name=(u'Precio4'))
-    price5 = models.PositiveSmallIntegerField(blank=True, null=True,
-                                              verbose_name=(u'Precio5'))
+        blank=True, null=True, verbose_name=(u'Precio'))   
     price_old = models.PositiveSmallIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Anterior'))
     active = models.BooleanField(default=True, verbose_name=(u'Activo'))
     offer = models.BooleanField(default=False, verbose_name=(u'Oferta'))
+    home = models.BooleanField(default=False, verbose_name=(u'Exclusivo'))
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
     modified_date = models.DateTimeField(

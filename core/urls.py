@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 from products.api.router import router_gallery
 from products.api.router import router_product_category
 from products.api.router import router_product
+from products.api.router import router_productOE
 from products.api.router import router_category
 from warehome.api.router import router_out
 from warehome.api.router import router_stock
@@ -18,6 +19,7 @@ from warehome.api.router import router_warehomedetail
 from accounts.api.router import router_user
 from carts.api.router import router_cart
 from stores.api.router import router_order
+from company.api.router import router_company
 
 #from favorite.api.router import router_favorite
 #from stores.api.router import router_categoryproduct
@@ -52,17 +54,19 @@ urlpatterns = [
     path('api/', include(router_stock.urls)),
     path('api/', include(router_user.urls)),
     path('api/', include(router_product.urls)),
+    path('api/', include(router_productOE.urls)),
     path('api/', include(router_gallery.urls)),
     path('api/', include(router_product_category.urls)),
     path('api/', include(router_cart.urls)),
     path('api/', include(router_order.urls)),
     path('api/', include(router_warehomedetail.urls)),
+    path('api/', include(router_company.urls)),
     #path('api/', include(router_favorite.urls)),
     # ---------------------------------------------------------------------
 
 
     #path('api/', include(router_categoryproduct.urls)),
 
-] 
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

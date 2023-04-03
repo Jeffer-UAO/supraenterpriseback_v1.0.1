@@ -7,7 +7,6 @@ import cloudinary.uploader
 import cloudinary.api
 
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,37 +17,48 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!fr6a*b!3hydo5@#j#ycc6(&5f4xd_$3z=(ws%jm3*!e2!nm!&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
-INSTALLED_APPS = [
-    "admin_interface",
-    "colorfield",
-    'django.contrib.admin',
-    'django.contrib.auth',
+SHARED_APPS = (
+    'django_tenants',
+    'customers.apps.CustomersConfig',
     'django.contrib.contenttypes',
+)
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.admin',
     'django.contrib.staticfiles',
-    'drf_yasg',
     'rest_framework_simplejwt',
-    'corsheaders',
     'simple_history',
     'rest_framework',
+    'drf_yasg',
+    'corsheaders',
+    "admin_interface",
+    "colorfield",    
     'accounts.apps.AccountsConfig',
     'products.apps.ProductsConfig',
-    'warehome.apps.WarehomeConfig',
-    'customers.apps.CustomersConfig',
     'carts.apps.CartConfig',
+    'warehome.apps.WarehomeConfig',
     'stores',
+    'company',
     'cloudinary',
-]
+)
+
+INSTALLED_APPS = list(SHARED_APPS) + \
+    [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,8 +104,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django_tenants.postgresql_backend',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'centronube_db6',
+        'USER': 'SYSDBA',
+        'PASSWORD': 'D3s4rr0ll0',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -141,12 +156,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 cloudinary.config(
-  cloud_name = "dnio5vufj",
-  api_key = "539833493919715",
-  api_secret = "huxBbY9u3457XMDHBUqihOntga8",
-#   secure = true
+    cloud_name="dnio5vufj",
+    api_key="539833493919715",
+    api_secret="huxBbY9u3457XMDHBUqihOntga8",
+    #   secure = true
 )
-
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -180,4 +194,10 @@ STATICFILES_DIRS = (
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
+# Tenant Config
+TENANT_MODEL = "customers.Client"
+TENANT_DOMAIN_MODEL = "customers.Domain"
 
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
