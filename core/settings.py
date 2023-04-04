@@ -25,32 +25,32 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 SHARED_APPS = (
-    'django_tenants',
-    'customers.apps.CustomersConfig',
+    'django_tenants',    
+    'customers',
+    # "admin_interface",
     'django.contrib.contenttypes',
 )
 
-TENANT_APPS = (
+TENANT_APPS = (   
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt',
-    'simple_history',
+    'rest_framework_simplejwt',    
     'rest_framework',
+    'simple_history',
+    'cloudinary',    
     'drf_yasg',
-    'corsheaders',
-    "admin_interface",
-    "colorfield",    
-    'accounts.apps.AccountsConfig',
-    'products.apps.ProductsConfig',
-    'carts.apps.CartConfig',
-    'warehome.apps.WarehomeConfig',
+    'corsheaders',    
+    'colorfield',    
+    'accounts',
+    'products',
+    'carts',
+    'warehome',
     'stores',
     'company',
-    'cloudinary',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + \
@@ -80,6 +80,16 @@ ROOT_URLCONF = 'core.urls'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
+
+TENANT_MODEL = "customers.Client"
+TENANT_DOMAIN_MODEL = "customers.Domain"
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -106,7 +116,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'centronube_db6',
+        'NAME': 'centronube_db12',
         'USER': 'SYSDBA',
         'PASSWORD': 'D3s4rr0ll0',
         'HOST': 'localhost',
@@ -193,11 +203,5 @@ STATICFILES_DIRS = (
 
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
+# print(MEDIA_ROOT)
 # Tenant Config
-TENANT_MODEL = "customers.Client"
-TENANT_DOMAIN_MODEL = "customers.Domain"
-
-DATABASE_ROUTERS = (
-    'django_tenants.routers.TenantSyncRouter',
-)

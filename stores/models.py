@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from accounts.models import Account, Address
 from products.models import Product
 

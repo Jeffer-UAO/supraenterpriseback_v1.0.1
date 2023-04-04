@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from simple_history.models import HistoricalRecords
+# from simple_history.models import HistoricalRecords
 from cloudinary.models import CloudinaryField
 
 
@@ -29,7 +29,7 @@ class Product(models.Model):
         auto_now_add=True, verbose_name=(u'Creado'))
     modified_date = models.DateTimeField(
         auto_now=True, verbose_name=(u'Modificado'))
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
 
     class Meta:
         verbose_name = 'Producto'
@@ -49,7 +49,7 @@ class Category(models.Model):
         auto_now_add=True, verbose_name=(u'Creado'))
     modified_date = models.DateTimeField(
         auto_now=True, verbose_name=(u'Modificado'))
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
 
     class Meta:
         verbose_name = 'Categoria'
@@ -95,7 +95,7 @@ class Gallery(models.Model):
 class Attribut(models.Model):
     name = models.CharField(max_length=50, unique=True,
                             verbose_name=(u'Nombre'))
-    history = HistoricalRecords()
+    # history = HistoricalRecords()
 
     class Meta:
         verbose_name = 'Atributo'

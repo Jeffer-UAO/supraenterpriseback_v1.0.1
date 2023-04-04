@@ -60,7 +60,7 @@ class CategoryProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Attribut, AttributAdmin)
-admin.site.register(CategoryProduct, CategoryProductAdmin)
+# admin.site.register(Attribut, AttributAdmin)
+# admin.site.register(CategoryProduct, CategoryProductAdmin)
 #admin.site.register(AttributProduct, AttributProductAdmin)
 #admin.site.register(ProductEntryDetail, ProductEntryDetailAdmin)
