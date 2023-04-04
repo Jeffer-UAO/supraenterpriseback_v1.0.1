@@ -116,10 +116,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'centronube_db12',
-        'USER': 'SYSDBA',
-        'PASSWORD': 'D3s4rr0ll0',
-        'HOST': 'localhost',
+        'NAME': 'd8nr1gaj0at2aq',
+        'USER': 'pzhudhevzgdsve',
+        'PASSWORD': '67972cb565e1dc1969025172cbd0eeba64e9b91cd67558eed650c28e737bba21',
+        'HOST': 'ec2-54-208-11-146.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
