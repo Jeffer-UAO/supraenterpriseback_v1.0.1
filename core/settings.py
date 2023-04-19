@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!fr6a*b!3hydo5@#j#ycc6(&5f4xd_$3z=(ws%jm3*!e2!nm!&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -45,6 +45,7 @@ TENANT_APPS = (
     'drf_yasg',
     'corsheaders',    
     'colorfield',    
+    'django_filters',
     'accounts',
     'products',
     'carts',
@@ -112,14 +113,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_tenants.postgresql_backend',
+#         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'centronube_db12',
+#         'USER': 'SYSDBA',
+#         'PASSWORD': 'D3s4rr0ll0',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8nr1gaj0at2aq',
-        'USER': 'pzhudhevzgdsve',
-        'PASSWORD': '67972cb565e1dc1969025172cbd0eeba64e9b91cd67558eed650c28e737bba21',
-        'HOST': 'ec2-54-208-11-146.compute-1.amazonaws.com',
+        'NAME': 'd34cpceviabpae',
+        'USER': 'pozanaweghlfmp',
+        'PASSWORD': 'a74c40be400b1c4924d1f6fbd316d9f9b12135fc9412c7eb297fa5575156d803',
+        'HOST': 'ec2-52-54-200-216.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

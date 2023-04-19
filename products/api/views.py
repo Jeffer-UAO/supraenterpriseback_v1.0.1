@@ -23,7 +23,7 @@ class ProductApiViewSet(ModelViewSet):
     queryset = Product.objects.all().order_by('name_extend')
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['flag', 'name_extend', 'description', 'ref']
-    filterset_fields = ['slug', 'flag']
+    filterset_fields = ['slug', 'flag', 'active']
 
 
 class ProductOEApiViewSet(ModelViewSet):

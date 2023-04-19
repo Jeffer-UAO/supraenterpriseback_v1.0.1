@@ -18,9 +18,9 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True, verbose_name=(u'Url'))
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=(u'Detalle'))
-    price1 = models.PositiveSmallIntegerField(
+    price1 = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio'))   
-    price_old = models.PositiveSmallIntegerField(
+    price_old = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Anterior'))
     active = models.BooleanField(default=True, verbose_name=(u'Activo'))
     offer = models.BooleanField(default=False, verbose_name=(u'Oferta'))
