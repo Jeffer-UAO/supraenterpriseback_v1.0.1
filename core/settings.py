@@ -130,11 +130,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd34cpceviabpae',
-        'USER': 'pozanaweghlfmp',
-        'PASSWORD': 'a74c40be400b1c4924d1f6fbd316d9f9b12135fc9412c7eb297fa5575156d803',
-        'HOST': 'ec2-52-54-200-216.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'gkESA9gdKSJH7OV9rPBQ',
+        'HOST': 'containers-us-west-109.railway.app',
+        'PORT': '7067',
     }
 }
 
