@@ -8,20 +8,24 @@ from cloudinary.models import CloudinaryField
 class Product(models.Model):
     codigo = models.BigAutoField(
         primary_key=True, auto_created=True, verbose_name=(u'Código'))
-    flag = models.CharField(max_length=200, blank=True, null=True,
-                            verbose_name=(u'Bandera'))
     name_extend = models.CharField(max_length=200, unique=True,
                                    verbose_name=(u'Nombre Producto'))
-    ref = models.CharField(max_length=200, blank=True, null=True,
-                            verbose_name=(u'Referencia'))
     images = CloudinaryField('products', blank=True)
-    slug = models.SlugField(max_length=200, unique=True, verbose_name=(u'Url'))
     description = models.TextField(
-        max_length=4000, blank=True, verbose_name=(u'Detalle'))
+        max_length=4000, blank=True, verbose_name=(u'Descripción el producto'))
     price1 = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio'))   
     price_old = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Anterior'))
+    flag = models.CharField(max_length=200, blank=True, null=True,
+                            verbose_name=(u'Grupo'))
+    
+    ref = models.CharField(max_length=200, blank=True, null=True,
+                            verbose_name=(u'Referencia'))
+    
+    slug = models.SlugField(max_length=200, unique=True, verbose_name=(u'Url'))
+    
+    
     active = models.BooleanField(default=True, verbose_name=(u'Activo'))
     offer = models.BooleanField(default=False, verbose_name=(u'Oferta'))
     home = models.BooleanField(default=False, verbose_name=(u'Exclusivo'))
