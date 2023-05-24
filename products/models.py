@@ -14,7 +14,9 @@ class Product(models.Model):
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=(u'Descripción el producto'))
     price1 = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=(u'Precio'))   
+        blank=True, null=True, verbose_name=(u'Precio Detal'))
+    price2 = models.PositiveIntegerField(
+        blank=True, null=True, verbose_name=(u'Precio por Mayor')) 
     price_old = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Anterior'))
     flag = models.CharField(max_length=200, blank=True, null=True,
