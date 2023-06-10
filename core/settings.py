@@ -30,10 +30,11 @@ SHARED_APPS = (
     'customers',
     # "admin_interface",
     'django.contrib.contenttypes',
+    'django.contrib.sites',
 )
 
 TENANT_APPS = (   
-    'django.contrib.sites',
+    
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
