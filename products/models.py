@@ -50,7 +50,8 @@ class Category(models.Model):
                             verbose_name=(u'Nombre'))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=(u'Url'))
 
-    image = CloudinaryField('categories', blank=True)
+    image = CloudinaryField('categories', blank=True,  transformation=[{'width': 300, 'height': 200, 'crop': 'limit'}, {'quality': 'auto'}], 
+                            format='webp')
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
     modified_date = models.DateTimeField(
