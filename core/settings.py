@@ -18,6 +18,7 @@ SECRET_KEY = 'django-insecure-!fr6a*b!3hydo5@#j#ycc6(&5f4xd_$3z=(ws%jm3*!e2!nm!&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SITE_ID = 1
 
 ALLOWED_HOSTS = ["*"]
 
@@ -32,6 +33,7 @@ SHARED_APPS = (
 )
 
 TENANT_APPS = (   
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
