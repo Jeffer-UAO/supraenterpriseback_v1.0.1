@@ -3,31 +3,41 @@ from django.utils.text import slugify
 from django.urls import reverse
 # from simple_history.models import HistoricalRecords
 from cloudinary.models import CloudinaryField
-from django.contrib.sites.models import Site
+from django_tenants.utils import get_public_schema_name
+from django.conf import settings
+from requests import request
+
+global_schema_name = None
+
+from django.shortcuts import render
+
 
 
 class Product(models.Model):
     codigo = models.BigAutoField(
         primary_key=True, auto_created=True, verbose_name=(u'Código'))
     name_extend = models.CharField(max_length=200, unique=True,
-                                   verbose_name=(u'Nombre Producto'))
-    images = CloudinaryField('products', blank=True)
+                                   verbose_name=(u'Nombre Producto'))    
+
+    images = CloudinaryField('categories/', blank=True,  transformation=[{'width': 300, 'height': 200, 'crop': 'limit'}, {'quality': 'auto'}], 
+                            format='webp')
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=(u'Descripción el producto'))
     price1 = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Detal'))
     price2 = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=(u'Precio por Mayor'))
+        blank=True, null=True, verbose_name=(u'Precio por Mayor')) 
     price_old = models.PositiveIntegerField(
         blank=True, null=True, verbose_name=(u'Precio Anterior'))
     flag = models.CharField(max_length=200, blank=True, null=True,
                             verbose_name=(u'Grupo'))
-
+    
     ref = models.CharField(max_length=200, blank=True, null=True,
-                           verbose_name=(u'Referencia'))
-
+                            verbose_name=(u'Referencia'))
+    
     slug = models.SlugField(max_length=200, unique=True, verbose_name=(u'Url'))
-
+    
+    
     active = models.BooleanField(default=True, verbose_name=(u'Activo'))
     offer = models.BooleanField(default=False, verbose_name=(u'Oferta'))
     home = models.BooleanField(default=False, verbose_name=(u'Exclusivo'))
@@ -43,19 +53,18 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name_extend} : cod:{self.codigo}'
+    
 
+    
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True,
                             verbose_name=(u'Nombre'))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=(u'Url'))
 
-    def get_tenant_folder(instance, filename):
-        return f"{Site.objects.get_current().name}/{filename}"
 
-    image = CloudinaryField('categories/', folder=get_tenant_folder, blank=True,
-                            transformation=[
-                                {'width': 300, 'height': 200, 'crop': 'limit'}, {'quality': 'auto'}],
+    image = CloudinaryField('categories/',  blank=True, 
+                            transformation=[{'width': 300, 'height': 200, 'crop': 'limit'}, {'quality': 'auto'}], 
                             format='webp')
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
@@ -72,8 +81,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
+ 
 class CategoryProduct(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name=(u'Producto'))

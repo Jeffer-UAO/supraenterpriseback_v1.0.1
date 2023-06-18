@@ -8,7 +8,7 @@ router_product_category = DefaultRouter()
 router_gallery = DefaultRouter()
 
 router_category.register(
-    prefix='category', basename='category', viewset=CategoryApiViewSet
+    prefix='category', basename='category', viewset=CategoryApiViewSet   
 )
 
 router_product.register(

@@ -7,34 +7,24 @@ import cloudinary.uploader
 import cloudinary.api
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-!fr6a*b!3hydo5@#j#ycc6(&5f4xd_$3z=(ws%jm3*!e2!nm!&'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-SITE_ID = 1
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-
-# Application definition
 
 SHARED_APPS = (
     'django_tenants',    
     'customers',
     # "admin_interface",
     'django.contrib.contenttypes',
-    'django.contrib.sites',
 )
 
 TENANT_APPS = (   
-    
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -61,6 +51,7 @@ INSTALLED_APPS = list(SHARED_APPS) + \
     [app for app in TENANT_APPS if app not in SHARED_APPS]
 
 
+
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -73,8 +64,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    ]
 
-]
+
+    
 
 SESSION_EXPIRE_SECONDS = 1800  # 1/2 hour
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True

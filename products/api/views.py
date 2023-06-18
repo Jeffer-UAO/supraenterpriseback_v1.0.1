@@ -5,6 +5,7 @@ from django.db.models import Q
 from rest_framework import filters
 
 
+
 from products.models import Gallery, Category, Product, CategoryProduct
 from products.api.serializers import GallerySerializer, CategorySerializer, ProductSerializer, CategoryProductSerializer
 
@@ -29,9 +30,10 @@ class ProductApiViewSet(ModelViewSet):
 class ProductOEApiViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
-    
+
     def get_queryset(self):
-        queryset = Product.objects.filter(Q(offer=True) | Q(home=True)).order_by('name_extend')
+        queryset = Product.objects.filter(
+            Q(offer=True) | Q(home=True)).order_by('name_extend')
         return queryset
 
 
