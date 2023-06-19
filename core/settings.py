@@ -109,30 +109,30 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django_tenants.postgresql_backend',
-#         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'centronube_db12',
-#         'USER': 'SYSDBA',
-#         'PASSWORD': 'D3s4rr0ll0',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'gkESA9gdKSJH7OV9rPBQ',
-        'HOST': 'containers-us-west-109.railway.app',
-        'PORT': '7067',
+        'NAME': 'centronube_db12',
+        'USER': 'SYSDBA',
+        'PASSWORD': 'D3s4rr0ll0',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_tenants.postgresql_backend',
+#         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'gkESA9gdKSJH7OV9rPBQ',
+#         'HOST': 'containers-us-west-109.railway.app',
+#         'PORT': '7067',
+#     }
+# }
 
 
 # Password validation
