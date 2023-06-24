@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!fr6a*b!3hydo5@#j#ycc6(&5f4xd_$3z=(ws%jm3*!e2!nm!&'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -109,7 +109,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
+
+##Local
+#
+#  DATABASES = {
 #     'default': {
 #         'ENGINE': 'django_tenants.postgresql_backend',
 #         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -122,6 +125,22 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 
+##Prueba
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_tenants.postgresql_backend',
+#         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '2yM5cNtLuIELNsuXSxar',
+#         'HOST': 'containers-us-west-71.railway.app',
+#         'PORT': '6061',
+#     }
+# }
+
+##Produccion
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
