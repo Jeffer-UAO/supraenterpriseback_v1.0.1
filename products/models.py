@@ -19,7 +19,7 @@ class Product(models.Model):
     name_extend = models.CharField(max_length=200, unique=True,
                                    verbose_name=(u'Nombre Producto'))    
 
-    images = CloudinaryField('categories/', blank=True,  transformation=[{'width': 800, 'height': 800, 'crop': 'limit'}, {'quality': 'auto'}], 
+    images = CloudinaryField('categories/', blank=True,  transformation=[{'width': 800, 'height': 1200, 'crop': 'limit'}, {'quality': 'auto'}], 
                             format='webp')
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=(u'Descripción el producto'))
@@ -52,19 +52,15 @@ class Product(models.Model):
         verbose_name_plural = 'Productos'
 
     def __str__(self):
-        return f'{self.name_extend} : cod:{self.codigo}'
-    
-
-    
+        return f'{self.name_extend} : cod:{self.codigo}'    
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True,
                             verbose_name=(u'Nombre'))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=(u'Url'))
 
-
     image = CloudinaryField('categories/',  blank=True, 
-                            transformation=[{'width': 300, 'height': 200, 'crop': 'limit'}, {'quality': 'auto'}], 
+                            transformation=[{'width': 800, 'height': 800, 'crop': 'limit'}, {'quality': 'auto'}], 
                             format='webp')
     created_date = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
