@@ -46,7 +46,7 @@ class AttributAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('active', 'images', 'name_extend', 'ref', 'codigo',  'price1', 'price2', 'flag', 'modified_date')
+    list_display = ('active', 'name_extend', 'ref', 'codigo',  'price1', 'price2', 'flag', 'modified_date')
     prepopulated_fields = {'slug': ('flag','name_extend')}
     list_display_links = ('codigo', 'flag','name_extend')
     search_fields = ('codigo', 'flag', 'ref', 'name_extend')
