@@ -102,7 +102,7 @@ class Gallery(models.Model):
     image = CloudinaryField('gallery', blank=True)
 
     def __str__(self):
-        return self.product.name
+        return self.product
 
     class Meta:
         verbose_name = 'Imagen'
