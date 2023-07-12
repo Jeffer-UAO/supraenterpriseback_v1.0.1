@@ -41,11 +41,11 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     first_name = models.CharField(
-        max_length=50, blank=True, verbose_name=(u'Nombres'))
+        max_length=50, blank=True, verbose_name=(u'Razon Social'))
     last_name = models.CharField(
-        max_length=50, blank=True, verbose_name=(u'Apellidos'))
+        max_length=50, blank=True, verbose_name=(u'Cliente'))
     username = models.CharField(
-        max_length=50, blank=True, verbose_name=(u'Usuario'))
+        max_length=50, blank=True, verbose_name=(u'Nit'))
     email = models.EmailField(
         max_length=100, unique=True, verbose_name=(u'Correo'))
     phone_number = models.CharField(
