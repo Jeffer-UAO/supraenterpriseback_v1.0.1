@@ -52,7 +52,7 @@ class Product(models.Model):
         verbose_name_plural = 'Productos'
 
     def __str__(self):
-        return f'{self.name_extend} : cod:{self.codigo}'    
+        return self.name_extend
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True,
