@@ -21,7 +21,7 @@ class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
         fields = ['codigo', 'ref', 'flag', 'name_extend', 'slug', 'description', 'images',
-                  'price_old',  'price1', 'price2', 'active', 'soldout', 'offer', 'home']
+                  'price_old',  'price1', 'price2', 'active', 'offer', 'home']
 
 
 class GallerySerializer(ModelSerializer):

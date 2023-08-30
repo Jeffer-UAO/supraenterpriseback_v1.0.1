@@ -39,7 +39,6 @@ class Product(models.Model):
     
     
     active = models.BooleanField(default=True, verbose_name=(u'Activo'))
-    soldout = models.BooleanField(default=False, verbose_name=(u'Agotado'))
     offer = models.BooleanField(default=False, verbose_name=(u'Oferta'))
     home = models.BooleanField(default=False, verbose_name=(u'Exclusivo'))
     created_date = models.DateTimeField(
