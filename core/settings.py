@@ -16,7 +16,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+ 
 SHARED_APPS = (
     'django_tenants',    
     'customers',
