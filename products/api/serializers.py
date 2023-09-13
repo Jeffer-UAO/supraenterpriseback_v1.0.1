@@ -5,8 +5,7 @@ from products.models import Gallery, Category, Product, CategoryProduct, Attribu
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'image']
-
+        fields = ["id", "name", "slug", "image", "image_alterna"]
 
 
 class AttributSerializer(ModelSerializer):
@@ -15,13 +14,28 @@ class AttributSerializer(ModelSerializer):
         fields = ['id', 'name']
 
 
-
 class ProductSerializer(ModelSerializer):
-   # data = CategoryProductSerializer(source='product_id', read_only=True, many=True)
+    # data = CategoryProductSerializer(source='product_id', read_only=True, many=True)
     class Meta:
         model = Product
-        fields = ['codigo', 'ref', 'flag', 'name_extend', 'slug', 'description', 'images',
-                  'price_old',  'price1', 'price2', 'active', 'soldout', 'offer', 'home']
+        fields = [
+            "codigo",
+            "ref",
+            "flag",
+            "name_extend",
+            "slug",
+            "description",
+            "images",
+            "image_alterna",
+            "price_old",
+            "price1",
+            "qty",
+            "price2",
+            "active",
+            "soldout",
+            "offer",
+            "home",
+        ]
 
 
 class GallerySerializer(ModelSerializer):
