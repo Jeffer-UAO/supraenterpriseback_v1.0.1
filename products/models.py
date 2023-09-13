@@ -69,27 +69,30 @@ class Product(models.Model):
         return f"{self.name_extend} : cod:{self.codigo}"
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True,
-                            verbose_name=(u'Nombre'))
-    slug = models.SlugField(max_length=100, unique=True, verbose_name=(u'Url'))
+class Category(models.Model):    
+    codigo = models.CharField(max_length=10, null=True, blank=True, verbose_name=("Código"))
+    name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))
+    slug = models.SlugField(max_length=100, unique=True, verbose_name=("Url"))
     image_alterna = models.CharField(max_length=600, null=True, blank=True)
-    image = CloudinaryField('categories/',  blank=True,
-                            transformation=[
-                                {'width': 800, 'height': 800, 'crop': 'limit'}, {'quality': 'auto'}],
-                            format='webp')
-    created_date = models.DateTimeField(
-        auto_now_add=True, verbose_name=(u'Creado'))
-    modified_date = models.DateTimeField(
-        auto_now=True, verbose_name=(u'Modificado'))
+    image = CloudinaryField(
+        "categories/",
+        blank=True,
+        transformation=[
+            {"width": 800, "height": 800, "crop": "limit"},
+            {"quality": "auto"},
+        ],
+        format="webp",
+    )
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=("Creado"))
+    modified_date = models.DateTimeField(auto_now=True, verbose_name=("Modificado"))
     # history = HistoricalRecords()
 
     class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"
 
     def get_url(self):
-        return reverse('products_by_category', args=[self.slug])
+        return reverse("products_by_category", args=[self.slug])
 
     def __str__(self):
         return self.name
