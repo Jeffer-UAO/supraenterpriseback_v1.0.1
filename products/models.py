@@ -118,6 +118,7 @@ class Gallery(models.Model):
     )
     image = CloudinaryField(
         "Imagen",
+        null=True,
         blank=True,
         transformation=[
             {"width": 800, "height": 800, "crop": "limit"},

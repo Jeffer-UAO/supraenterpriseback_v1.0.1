@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import path
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Product, Category, CategoryProduct, Attribut, Gallery
+from .models import Product, Category, CategoryProduct, Gallery
 
 
 # ------------------------------------------
@@ -364,7 +364,7 @@ class GalleryAdmin(admin.ModelAdmin):
                                 else:
                                     gallery = Gallery(
                                         product=gallery,
-                                        image=str(row[1]) if row[1] else "",
+                                        image= "",
                                         image_alterna=str(
                                             row[2]) if row[2] else "",
                                     )
