@@ -100,11 +100,11 @@ class ProductAdmin(admin.ModelAdmin):
                             row = row.split(";")
                             # row = row.replace(
                             #     ";", " "
-                            # )  # Replace semicolons with spaces
 
                             if len(row) >= 16:
                                 category_id = row[14]
                                 original_string = str(row[8])
+                                gallery_image = str(row[13]).split(',')
                                 cleaned_string = re.sub(
                                     r"[^a-zA-Z0-9 ]", "", original_string
                                 )
@@ -122,7 +122,7 @@ class ProductAdmin(admin.ModelAdmin):
                                             codigo=category_id,
                                             name=category_id,
                                             slug=category_id,
-                                            image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
+                                            image_alterna="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Falta_imagen.jpg/640px-Falta_imagen.jpg",
                                         )
                                         category.save()
 
@@ -159,6 +159,12 @@ class ProductAdmin(admin.ModelAdmin):
                                         qty=int(row[15]) if row[15] else None,
                                     )
                                     product.save()
+
+                                    if any(image.strip() for image in gallery_image):
+                                        for image_path in gallery_image:
+                                            gallery = Gallery(
+                                                product=product, image_alterna=image_path.strip())
+                                            gallery.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = (
@@ -216,6 +222,16 @@ class ProductAdmin(admin.ModelAdmin):
                                         int(row[15]) if row[15] != "" else product.qty
                                     )
                                     product.save()
+
+                                    if any(image.strip() for image in gallery_image):
+
+                                        Gallery.objects.filter(
+                                            product=product).delete()
+
+                                        for image_path in gallery_image:
+                                            gallery = Gallery(
+                                                product=product, image_alterna=image_path.strip())
+                                            gallery.save()
 
                                 if category != None:
                                     try:
@@ -321,67 +337,67 @@ class CategoryProductAdmin(admin.ModelAdmin):
     list_display_links = ("category", "product")
 
 
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ("id", "image", "image_alterna")
-    list_display_links = ("id", "image", "image_alterna")
-    # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
-    # inlines = [GalleryInline]
+# class GalleryAdmin(admin.ModelAdmin):
+#     list_display = ("id", "image", "image_alterna")
+#     list_display_links = ("id", "image", "image_alterna")
+#     # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
+#     # inlines = [GalleryInline]
 
-    def get_urls(self):
-        urls = super().get_urls()
-        new_urls = [
-            path("upload-csv/", self.upload_csv),
-        ]
-        return new_urls + urls
+    # def get_urls(self):
+    #     urls = super().get_urls()
+    #     new_urls = [
+    #         path("upload-csv/", self.upload_csv),
+    #     ]
+    #     return new_urls + urls
 
-    def upload_csv(self, request):
-        if request.method == "POST":
-            csv_file = request.FILES.get("csv_upload")
+    # def upload_csv(self, request):
+    #     if request.method == "POST":
+    #         csv_file = request.FILES.get("csv_upload")
 
-            if csv_file:
-                try:
-                    file_data = csv_file.read().decode("utf-8")
-                    csv_data = file_data.split("\n")
+    #         if csv_file:
+    #             try:
+    #                 file_data = csv_file.read().decode("utf-8")
+    #                 csv_data = file_data.split("\n")
 
-                    for i, row in enumerate(csv_data):
-                        if i == 0:
-                            continue
-                        else:
-                            row = row.strip()
-                            row = row.split(";")
+    #                 for i, row in enumerate(csv_data):
+    #                     if i == 0:
+    #                         continue
+    #                     else:
+    #                         row = row.strip()
+    #                         row = row.split(";")
 
-                            if len(row) >= 3:
-                                gallery = None
-                                try:
-                                    # Intenta obtener la galleria existente
-                                    gallery = Product.objects.get(
-                                        codigo=str(row[0]))
-                                except ObjectDoesNotExist:
-                                    gallery = None
+    #                         if len(row) >= 3:
+    #                             gallery = None
+    #                             try:
+    #                                 # Intenta obtener la galleria existente
+    #                                 gallery = Product.objects.get(
+    #                                     codigo=str(row[0]))
+    #                             except ObjectDoesNotExist:
+    #                                 gallery = None
 
-                                if gallery is None:
-                                    print("Producto no existe")
-                                else:
-                                    gallery = Gallery(
-                                        product=gallery,
-                                        image= "",
-                                        image_alterna=str(
-                                            row[2]) if row[2] else "",
-                                    )
-                                    gallery.save()
+    #                             if gallery is None:
+    #                                 print("Producto no existe")
+    #                             else:
+    #                                 gallery = Gallery(
+    #                                     product=gallery,
+    #                                     image="",
+    #                                     image_alterna=str(
+    #                                         row[2]) if row[2] else "",
+    #                                 )
+    #                                 gallery.save()
 
-                except Exception as e:
-                    # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
-                    print(f"Error al procesar el archivo CSV: {str(e)}")
+    #             except Exception as e:
+    #                 # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
+    #                 print(f"Error al procesar el archivo CSV: {str(e)}")
 
-        form = CsvImportForm()
-        data = {"form": form}
-        return render(request, "admin/csv_gallery.html", data)
+    #     form = CsvImportForm()
+    #     data = {"form": form}
+    #     return render(request, "admin/csv_gallery.html", data)
 
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Gallery, GalleryAdmin)
+# admin.site.register(Gallery, GalleryAdmin)
 # admin.site.register(Attribut, AttributAdmin)
 # admin.site.register(CategoryProduct, CategoryProductAdmin)
 # admin.site.register(AttributProduct, AttributProductAdmin)
