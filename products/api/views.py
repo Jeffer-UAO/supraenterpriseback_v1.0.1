@@ -23,7 +23,7 @@ class ProductApiViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all().order_by('name_extend')
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
-    search_fields = ['flag', 'name_extend', 'description', 'ref']
+    search_fields = ['flag', 'name_extend', 'description', 'ref', 'codigo', 'price1']
     filterset_fields = ['slug', 'flag', 'active']
 
 
