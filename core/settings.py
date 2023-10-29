@@ -6,14 +6,13 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-from dotenv import load_dotenv
-load_dotenv()
+from decouple import config
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('API_SECRET_KEY')
-DEBUG = True
+SECRET_KEY = config('API_SECRET_KEY')
+DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
 
@@ -103,12 +102,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE_DB'),
-        'NAME': os.getenv('NAME_DB'),
-        'USER': os.getenv('USER_DB'),
-        'PASSWORD': os.getenv('PASSWORD_DB'),
-        'HOST': os.getenv('HOST_DB'),
-        'PORT': os.getenv('PORT_DB'),
+        'ENGINE': config('ENGINE_DB'),
+        'NAME': config('NAME_DB'),
+        'USER': config('USER_DB'),
+        'PASSWORD': config('PASSWORD_DB'),
+        'HOST': config('HOST_DB'),
+        'PORT': config('PORT_DB'),
     }
 }
 
@@ -139,9 +138,9 @@ USE_TZ = True
 
 
 cloudinary.config(
-    cloud_name=os.getenv('NAME_CD'),
-    api_key=os.getenv('APY_KEY_CD'),
-    api_secret=os.getenv('APY_SECRET_CD'),
+    cloud_name = config('NAME_CD'),
+    api_key = config('APY_KEY_CD'),
+    api_secret = config('APY_SECRET_CD'),
     #   secure = true
 )
 
