@@ -40,7 +40,7 @@ class ProductOEApiViewSet(ModelViewSet):
 class CategoryProductApiViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = CategoryProductSerializer
-    queryset = CategoryProduct.objects.all().order_by('id')
+    queryset = CategoryProduct.objects.all().order_by('-created_date')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category']
 
