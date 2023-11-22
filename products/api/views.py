@@ -21,7 +21,7 @@ class CategoryApiViewSet(ModelViewSet):
 class ProductApiViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
-    queryset = Product.objects.all().order_by('created_date')
+    queryset = Product.objects.all().order_by('-created_date')
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['flag', 'name_extend', 'description', 'ref', 'codigo', 'price1']
     filterset_fields = ['slug', 'flag', 'active']
