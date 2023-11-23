@@ -22,8 +22,8 @@ class Product(models.Model):
         "Imagen",
         blank=True,
         transformation=[
-            {"width": 800, "height": 1200, "crop": "limit"},
-            {"quality": "auto"},
+            {"width": 800, "height": 800, "crop": "limit"},
+            {"quality": "auto:low"},
         ],
         format="webp",
     )
@@ -31,7 +31,7 @@ class Product(models.Model):
         max_length=600, null=True, default="", blank=True, verbose_name=("Imagen Alterna")
     )
     description = models.TextField(
-        max_length=4000, blank=True, verbose_name=("Descripción el producto")
+        max_length=2000, blank=True, verbose_name=("Descripción el producto")
     )
     price1 = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name=("Precio Detal")
@@ -73,8 +73,8 @@ class Category(models.Model):
         "Imagen",
         blank=True,
         transformation=[
-            {"width": 800, "height": 800, "crop": "limit"},
-            {"quality": "auto"},
+            {"width": 800, "height": 600, "crop": "limit"},
+            {"quality": 50},
         ],
         format="webp",
     )
