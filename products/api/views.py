@@ -6,8 +6,8 @@ from rest_framework import filters
 
 
 
-from products.models import Gallery, Category, Product, CategoryProduct
-from products.api.serializers import GallerySerializer, CategorySerializer, ProductSerializer, CategoryProductSerializer
+from products.models import Gallery, Category, Product, CategoryProduct, Attribut
+from products.api.serializers import GallerySerializer, CategorySerializer, ProductSerializer, CategoryProductSerializer, AttributSerializer
 
 
 class CategoryApiViewSet(ModelViewSet):
@@ -51,3 +51,10 @@ class GalleryApiViewSet(ModelViewSet):
     queryset = Gallery.objects.all().order_by('id')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['product']
+
+
+class AttributApiViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = AttributSerializer
+    queryset = Attribut.objects.all().order_by('id') 
+    

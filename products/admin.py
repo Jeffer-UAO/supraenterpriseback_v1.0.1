@@ -5,11 +5,10 @@ from django.shortcuts import render
 from django.urls import path
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Product, Category, CategoryProduct, Gallery
+from .models import Product, Category, CategoryProduct, Gallery, Attribut
 
 
 # ------------------------------------------
-
 # admin.site.index_title = 'Panel Administrativo'
 # admin.site.site_header = 'Tienda Virtual NACIOTEX'
 # admin.site.site_title = 'Dashboard'
@@ -54,7 +53,6 @@ class AttributAdmin(admin.ModelAdmin):
 
 class CsvImportForm(forms.Form):
     csv_upload = forms.FileField()
-
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
@@ -254,7 +252,6 @@ class ProductAdmin(admin.ModelAdmin):
         data = {"form": form}
         return render(request, "admin/csv_product.html", data)
 
-
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ("codigo", "name", "created_date")
@@ -330,7 +327,6 @@ class CategoryAdmin(admin.ModelAdmin):
         data = {"form": form}
         return render(request, "admin/csv_category.html", data)
 
-
 class CategoryProductAdmin(admin.ModelAdmin):
     list_display = ("category", "product", "active", "created_date")
     readonly_fields = ("created_date",)
@@ -398,7 +394,7 @@ class CategoryProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 # admin.site.register(Gallery, GalleryAdmin)
-# admin.site.register(Attribut, AttributAdmin)
+admin.site.register(Attribut, AttributAdmin)
 # admin.site.register(CategoryProduct, CategoryProductAdmin)
 # admin.site.register(AttributProduct, AttributProductAdmin)
 # admin.site.register(ProductEntryDetail, ProductEntryDetailAdmin)
