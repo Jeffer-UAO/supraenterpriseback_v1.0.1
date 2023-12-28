@@ -22,7 +22,7 @@ class Product(models.Model):
         "Imagen",
         blank=True,
         transformation=[
-            {"width": 800, "height": 800, "crop": "limit"},
+            {"width": 800, "crop": "limit"},
             {"quality": "auto:low"},
         ],
         format="webp",
@@ -73,8 +73,8 @@ class Category(models.Model):
         "Imagen",
         blank=True,
         transformation=[
-            {"width": 800, "height": 600, "crop": "limit"},
-            {"quality": 50},
+            {"width": 800, "crop": "limit"},
+            {"quality": "auto:low"},
         ],
         format="webp",
     )
@@ -121,8 +121,8 @@ class Gallery(models.Model):
         null=True,
         blank=True,
         transformation=[
-            {"width": 800, "height": 800, "crop": "limit"},
-            {"quality": "auto"},
+            {"width": 800, "crop": "limit"},
+            {"quality": "auto:low"},
         ],
         format="webp",
     )
@@ -148,3 +148,19 @@ class Attribut(models.Model):
 
     def __str__(self):
         return self.name
+
+class AttributProduct(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, verbose_name=("Producto")
+    )   
+    attribut = models.ForeignKey(
+        Attribut, on_delete=models.CASCADE, verbose_name=("Atributo")
+    )
+
+    class Meta:
+        verbose_name = "Atributo de Producto"
+        verbose_name_plural = "Atributos de Productos"
+
+    def __str__(self):
+        return str(self.attribut)
+    

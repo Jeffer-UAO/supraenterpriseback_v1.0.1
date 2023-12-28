@@ -18,7 +18,6 @@ from .models import Product, Category, CategoryProduct, Gallery, Attribut
 class GalleryInline(admin.TabularInline):
     model = Gallery
 
-
 class CategoryProductInline(admin.TabularInline):
     model = CategoryProduct
 
@@ -34,21 +33,6 @@ class AttributAdmin(admin.ModelAdmin):
     # inlines = [AttributProductInline]
 
 
-# class AttributProductAdmin(admin.ModelAdmin):
-#     list_display = ('product', 'Attribut',  'detail')
-
-
-# class ProductEntryDetailAdmin(admin.ModelAdmin):
-#    list_display = ('product', 'qty', 'costo', 'iva', 'ProductEntry')
-
-
-# class ProductAdmin(admin.ModelAdmin):
-#     list_display = ('active', 'name_extend', 'ref', 'codigo',  'price1', 'flag', 'modified_date')
-#     prepopulated_fields = {'slug': ('flag','name_extend')}
-#     list_display_links = ('codigo', 'flag','name_extend')
-#     search_fields = ('codigo', 'flag', 'ref', 'name_extend')
-#     ordering = ('name_extend',)
-#     inlines = [GalleryInline, CategoryProductInline]
 
 
 class CsvImportForm(forms.Form):
@@ -333,6 +317,31 @@ class CategoryProductAdmin(admin.ModelAdmin):
     list_display_links = ("category", "product")
 
 
+
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Attribut, AttributAdmin)
+# admin.site.register(Gallery, GalleryAdmin)
+# admin.site.register(CategoryProduct, CategoryProductAdmin)
+# admin.site.register(AttributProduct, AttributProductAdmin)
+# admin.site.register(ProductEntryDetail, ProductEntryDetailAdmin)
+
+# class AttributProductAdmin(admin.ModelAdmin):
+#     list_display = ('product', 'Attribut',  'detail')
+
+
+# class ProductEntryDetailAdmin(admin.ModelAdmin):
+#    list_display = ('product', 'qty', 'costo', 'iva', 'ProductEntry')
+
+
+# class ProductAdmin(admin.ModelAdmin):
+#     list_display = ('active', 'name_extend', 'ref', 'codigo',  'price1', 'flag', 'modified_date')
+#     prepopulated_fields = {'slug': ('flag','name_extend')}
+#     list_display_links = ('codigo', 'flag','name_extend')
+#     search_fields = ('codigo', 'flag', 'ref', 'name_extend')
+#     ordering = ('name_extend',)
+#     inlines = [GalleryInline, CategoryProductInline]
+
 # class GalleryAdmin(admin.ModelAdmin):
 #     list_display = ("id", "image", "image_alterna")
 #     list_display_links = ("id", "image", "image_alterna")
@@ -389,12 +398,3 @@ class CategoryProductAdmin(admin.ModelAdmin):
     #     form = CsvImportForm()
     #     data = {"form": form}
     #     return render(request, "admin/csv_gallery.html", data)
-
-
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Category, CategoryAdmin)
-# admin.site.register(Gallery, GalleryAdmin)
-admin.site.register(Attribut, AttributAdmin)
-# admin.site.register(CategoryProduct, CategoryProductAdmin)
-# admin.site.register(AttributProduct, AttributProductAdmin)
-# admin.site.register(ProductEntryDetail, ProductEntryDetailAdmin)
