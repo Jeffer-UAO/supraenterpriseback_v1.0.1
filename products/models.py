@@ -111,6 +111,10 @@ class CategoryProduct(models.Model):
 
     def __str__(self):
         return str(self.category)
+    
+    def save(self, *args, **kwargs):        
+        self.active = self.product.active
+        super().save(*args, **kwargs)
 
 class Gallery(models.Model):
     product = models.ForeignKey(
