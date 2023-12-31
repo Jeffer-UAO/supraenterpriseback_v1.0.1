@@ -42,7 +42,7 @@ class CategoryProductApiViewSet(ModelViewSet):
     serializer_class = CategoryProductSerializer
     queryset = CategoryProduct.objects.all().order_by('-created_date')
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['category']
+    filterset_fields = ['category', 'active']
 
 
 class GalleryApiViewSet(ModelViewSet):
