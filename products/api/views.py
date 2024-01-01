@@ -13,7 +13,7 @@ from products.api.serializers import GallerySerializer, CategorySerializer, Prod
 class CategoryApiViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = CategorySerializer
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('-created_date')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['slug']
 
