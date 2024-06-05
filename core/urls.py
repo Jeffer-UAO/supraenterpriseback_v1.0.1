@@ -20,6 +20,7 @@ from accounts.api.router import router_user
 from carts.api.router import router_cart
 from stores.api.router import router_order
 from company.api.router import router_company
+from videos.api.router import router_videos
 
 #from favorite.api.router import router_favorite
 #from stores.api.router import router_categoryproduct
@@ -61,6 +62,7 @@ urlpatterns = [
     path('api/', include(router_order.urls)),
     path('api/', include(router_warehomedetail.urls)),
     path('api/', include(router_company.urls)),
+    path('api/', include(router_videos.urls)),
     #path('api/', include(router_favorite.urls)),
     # ---------------------------------------------------------------------
 
