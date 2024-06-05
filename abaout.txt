@@ -77,4 +77,4 @@ The application includes the following features:
 - Authentication and authorization: Users can register and log in to the application. Access to certain features is restricted based on user roles and permissions.
 - Product management: Tenants can add, edit, and delete products.
 - Order management: Tenants can view, process, and fulfill orders.
-- Inventory management: Tenants can track their inventory levels and reorder
+- Inventory management: Tenants can track their inventory levels and reorder.
