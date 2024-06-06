@@ -38,13 +38,13 @@ TENANT_APPS = (
     'corsheaders',
     'colorfield',
     'django_filters',
+    'customers',
     'accounts',
     'products',
     'carts',
     'warehome',
     'stores',
     'company',
-    
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + \

@@ -1,8 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,  PermissionsMixin
 
-
-# Create your models here.
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
@@ -54,7 +52,8 @@ class Account(AbstractBaseUser):
     # required
     date_joined = models.DateTimeField(
         auto_now_add=True, verbose_name=(u'Creado'))
-    last_login = models.DateTimeField(auto_now_add=True, verbose_name=(u'Modificado'))
+    last_login = models.DateTimeField(
+        auto_now_add=True, verbose_name=(u'Modificado'))
     is_admin = models.BooleanField(
         default=False, verbose_name=(u'Administrador'))
     is_staff = models.BooleanField(default=False, verbose_name=(u'Grupo'))
