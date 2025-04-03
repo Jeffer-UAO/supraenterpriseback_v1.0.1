@@ -6,6 +6,7 @@ from django.urls import path
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Product, Category, CategoryProduct, Gallery, Attribut
+from django.utils.html import format_html
 
 
 # ------------------------------------------
@@ -39,24 +40,49 @@ class CsvImportForm(forms.Form):
     csv_upload = forms.FileField()
 
 class ProductAdmin(admin.ModelAdmin):
+    readonly_fields = ('image_preview',)
+
     list_display = (
+        'image_preview',
         "codigo",
         "name_extend",
         "ref",
-        "qty",
+        # "qty",
         "price1",
         "price2",
         "active",
         "soldout",
-        "offer",
-        "home",
-        "flag",
+        # "offer",
+        # "home",
+        # "flag",
     )
     prepopulated_fields = {"slug": ("flag", "name_extend")}
-    list_display_links = ("codigo", "flag", "name_extend")
-    search_fields = ("codigo", "flag", "ref", "name_extend")
+    list_display_links = ("image_preview", "codigo", "name_extend")
+    search_fields = ("codigo", "ref", "name_extend")
     ordering = ("name_extend",)
     inlines = [CategoryProductInline, GalleryInline]
+
+
+    def image_preview(self, obj):
+        """Muestra una vista previa de la imagen en el admin con bordes redondeados."""
+        image_url = None
+
+        if hasattr(obj, 'images') and obj.images:
+            image_url = obj.images.url
+        elif hasattr(obj, 'image_alterna') and obj.image_alterna:
+            image_url = obj.image_alterna.url if hasattr(obj.image_alterna, 'url') else obj.image_alterna
+
+        if image_url:
+            return format_html(
+                '<img src="{}" width="100" height="100" style="border-radius: 10px; object-fit: cover;" />', image_url
+            )
+
+        return "No Image"
+
+    image_preview.short_description = "Vista Previa"
+
+
+
 
     def get_urls(self):
         urls = super().get_urls()

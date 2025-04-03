@@ -12,7 +12,7 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('API_SECRET_KEY')
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
@@ -44,7 +44,7 @@ TENANT_APPS = (
     'warehome',
     'stores',
     'company',
-    'videos'
+    'videos',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + \
@@ -152,6 +152,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CARS_ALLOW_CREDENCIALS = True
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=100)
