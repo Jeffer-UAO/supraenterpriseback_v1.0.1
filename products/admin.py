@@ -60,6 +60,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ("image_preview", "codigo", "name_extend")
     search_fields = ("codigo", "ref", "name_extend")
     ordering = ("name_extend",)
+    list_per_page = 20
     inlines = [CategoryProductInline, GalleryInline]
 
 
